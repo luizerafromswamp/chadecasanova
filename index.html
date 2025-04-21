@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chá de Casa Nova</title>
+    <style>
+      :root {
+        --primary-color: #fce4e7;
+        --secondary-color: #fff0f2;
+        --text-color: #333333;
+        --reserved-color: #d3d3d3;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #fff;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      header {
+        position: relative;
+        text-align: center;
+        padding: 6rem 1rem;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        background-color: var(--primary-color);
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0.9), var(--primary-color));
+      }
+
+      .photo-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 400px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px;
+        opacity: 0.2;
+        z-index: 1;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        filter: brightness(0.9);
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+        margin-bottom: 5%;
+      }
+
+      .couple-names {
+        font-size: 3.5rem;
+        margin-bottom: 0.1rem;
+        color: #222;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        font-family: 'Georgia', serif;
+      }
+
+      .header-message {
+        font-size: 2rem;
+        max-width: 800px;
+        margin: 1.5rem auto;
+        color: #222;
+        text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        font-family: 'Arial', sans-serif;
+        background-color: rgba(255,255,255,0.7);
+        padding: 1rem;
+        border-radius: 10px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .gift-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+
+      .gift-item {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: transform 0.2s;
+        position: relative;
+      }
+
+      .gift-item.fixed {
+        background-color: #fff3cd;
+        border: 2px solid #ffd700;
+      }
+
+      .star-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #ffd700;
+        font-size: 1.5rem;
+      }
+
+      .gift-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .gift-item.reserved {
+        background-color: var(--reserved-color);
+        text-decoration: line-through;
+        opacity: 0.7;
+      }
+
+      .gift-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .gift-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .gift-description {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: opacity 0.2s;
+      }
+
+      .instrucoes {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+      .button:hover {
+        opacity: 0.8;
+      }
+
+      .buy-button {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .whatsapp-button {
+        background-color: #25d366;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .couple-names {
+          font-size: 2rem;
+        }
+
+        .header-message {
+          font-size: 1rem;
+        }
+
+        .gift-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!-- EDITAR: Grid de fotos do casal/família -->
+      <div class="photo-grid">
+        <!-- Substitua os links das imagens pelas suas fotos -->
+        <img src="assets/foto1.jpg" alt="Foto 1" />
+        <img src="assets/foto2.jpg" alt="Foto 2" />
+        <img src="assets/foto3.jpg" alt="Foto 3" />
+        <img src="assets/foto4.jpg" alt="Foto 4" />
+        <img src="assets/foto5.jpg" alt="Foto 5" />
+        <img src="assets/foto6.jpg" alt="Foto 6" />
+      </div>
+      <div class="header-content">
+        <!-- EDITAR: Nomes do casal -->
+        <h1 class="couple-names">
+          Chá de Casa Nova da Antônia, Clarissa & Luiz 🏠
+        </h1>
+        <!-- EDITAR: Mensagem de boas-vindas -->
+        <p class="header-message">
+          Estamos de casa nova e contamos com seu carinho para tornar nosso lar
+          ainda mais completo! ❤️
+        </p>
+      </div>
+      <section class="instrucoes">
+        <h2>Como Participar 🛍️</h2>
+        <div class="passo">
+          <span>1️⃣</span>
+          <p>
+            Escolha um item e clique em <strong>"Presentear"</strong> para ir à
+            loja.
+             <br>Prefere nos entregar pessoalmente? Será um prazer! 
+             <br>Se preferir nos enviar, o endereço de entrega é <strong>Av. Presidente Nereu Ramos, 1100, AP 501.</strong>
+          </p>
+        </div>
+        <div class="passo">
+          <span>2️⃣</span>
+          <p>
+           Finalize seu pedido e <strong>volte a este site</strong>.</p>
+        </div>
+        <div class="passo">
+          <span>3️⃣</span>
+          <p>
+            Clique em <strong>"Avisar"</strong> no mesmo item e nos deixe uma
+            mensagem!
+          </p>
+        </div>
+      </section>
+    </header>
+
+    <div class="container">
+      <div class="gift-list">
+        <!-- Item fixo: Botão de Dúvidas WhatsApp -->
+        <div class="gift-item fixed">
+          <span class="star-icon">⭐</span>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png"
+            alt="WhatsApp"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Dúvidas?</h3>
+          <p class="gift-description">Manda um zap pra gente!</p>
+          <div class="button-group">
+            <a
+              href="https://wa.me/554891283484?text=Olá! Tenho uma dúvida sobre o chá de casa nova!"
+              target="_blank"
+              class="button whatsapp-button"
+              style="width: 100%"
+              >Falar no WhatsApp</a
+            >
+          </div>
+        </div>
+
+        <!-- Item fixo: PIX -->
+        <div class="gift-item fixed">
+          <span class="star-icon">⭐</span>
+          <img
+            src="https://logospng.org/download/pix/logo-pix-icone-512.png"
+            alt="PIX"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Saímos do aluguel!! ajuda nóis com um PIX</h3>
+          <p class="gift-description">Contribua com qualquer valor ❤️</p>
+          <div class="button-group">
+            <button
+              onclick="alert('Chave PIX: 54999172340\nTipo: Telefone\nNome: Clarissa\n\nChave PIX: 48991283484\nTipo: Telefone\nNome: Luiz')"
+              class="button buy-button"
+              style="width: 100%; border: none; cursor: pointer"
+            >
+              Presentear
+            </button>
+          </div>
+        </div>
+
+        <!-- Exemplo de item PRESENTEADO! -->
+        <div class="gift-item reserved">
+          <img
+            src="https://a-static.mlcdn.com.br/800x560/air-fryer-philips-walita-serie-1000-xl-na130-preta-com-timer-62l/magazineluiza/238674800/94ff2d09f2c72d63d220bb1c875a6ec0.jpg"
+            alt="Air Fryer"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Air Fryer</h3>
+          <p class="gift-description">Philips Walit, Série 1000 XL, Preta, com Timer, 6,2L</p>
+          <div class="button-group">
+            <a href="#" class="button buy-button" style="pointer-events: none"
+              >PRESENTEADO!</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item reserved">
+          <img
+            src="https://imgs.casasbahia.com.br/55033545/1g.jpg?imwidth=256"
+            alt="Liquidificador"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Liquidificador</h3>
+          <p class="gift-description">1000W, copo de vidro, 5 velocidades</p>
+          <div class="button-group">
+            <a href="#" class="button buy-button" style="pointer-events: none"
+              >PRESENTEADO!</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item reserved">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_854265-MLA79956944482_102024-F.webp"
+            alt="Faqueiro"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Faqueiro</h3>
+          <p class="gift-description">Tramontina, 72 Peças, Aço Inox, Cor Cinza</p>
+          <div class="button-group">
+            <a href="#" class="button buy-button" style="pointer-events: none"
+              >PRESENTEADO!</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item reserved">
+          <img
+            src="https://m.media-amazon.com/images/I/51429bjUOCL.__AC_SX300_SY300_QL70_ML2_.jpg"
+            alt="Panela de Pressão Elétrica"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Panela de Pressão Elétrica</h3>
+          <p class="gift-description">Electrolux, capicade 5L, silenciosa, 9 travas segurança, inox 220v, por Rita Lobo</p>
+          <div class="button-group">
+            <a href="#" class="button buy-button" style="pointer-events: none"
+              >PRESENTEADO!</a
+            >
+          </div>
+        </div>
+
+
+
+
+
+        <!-- EDITAR: Copie e cole este bloco para adicionar mais itens -->
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_649071-MLU69827895925_062023-F.webp"
+            alt="Mixer"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Mixer</h3>
+          <p class="gift-description">
+            Turbo Chef 3 Em 1, 200w, Triturador E Fuet, 220v, Elgin, Cor Preto
+          </p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.mercadolivre.com.br/mixer-turbo-chef-3-em-1-200w-triturador-e-fuet-220v-elgin-cor-preto/p/MLB18709031?pdp_filters=item_id%3AMLB4518030298&from=gshop&matt_tool=60011407&matt_internal_campaign_id=&matt_word=&matt_source=google&matt_campaign_id=22090354511&matt_ad_group_id=173090614316&matt_match_type=&matt_network=g&matt_device=c&matt_creative=727882733667&matt_keyword=&matt_ad_position=&matt_ad_type=pla&matt_merchant_id=735128188&matt_product_id=MLB18709031-product&matt_product_partition_id=2389819849654&matt_target_id=pla-2389819849654&cq_src=google_ads&cq_cmp=22090354511&cq_net=g&cq_plt=gp&cq_med=pla&gad_source=1&gclid=CjwKCAjwtdi_BhACEiwA97y8BGpYAEGDAD6u0U1-jzs4IFBKzhdwKutIZEj_MLsVk5IacPUuVaWCwRoCDrgQAvD_BwE"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Mixer!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_876338-MLU72641174829_112023-F.webp"
+            alt="Cooktop"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Cooktop</h3>
+          <p class="gift-description">4 Bocas, A Gás, Consul, Preto, Bivolt</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.mercadolivre.com.br/cooktop-4-bocas-a-gas-consul-cd060ae-preto-bivolt/p/MLB11193923#polycard_client=search_best-seller&wid=MLB1832130070&sid=search"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Cooktop!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61APcshc2WL._AC_SX679_.jpg"
+            alt="Potes de vidro"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Potes de vidro</h3>
+          <p class="gift-description">
+            Retangular com Tampa Hermética, 640ml, Cor:Branco
+          </p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/Potes-Vidro-Retangular-Tampa-Herm%C3%A9tica/dp/B08CPFRKZ4/ref=asc_df_B08CPFRKZ4?mcid=733cc1d6452a3c5fa03f5e89b7e8ef06&tag=googleshopp06-20&linkCode=df0&hvadid=709886677840&hvpos=undefined&hvnetw=g&hvrand=3649939783772408602&hvpone=undefined&hvptwo=undefined&hvqmt=undefined&hvdev=m&hvdvcmdl=undefined&hvlocint=undefined&hvlocphy=9102241&hvtargid=pla-967381813153&language=pt_BR&gad_source=1&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Kit Potes de vidro!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_867763-MLB77614681355_072024-F-kit-3-travessas-com-alca-retangular-cermica-louca-decoraco.webp"
+            alt="Kit travessas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Travessas</h3>
+          <p class="gift-description">
+            Com Alça Retangular, Cerâmica, Louça, Decoração
+          </p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://produto.mercadolivre.com.br/MLB-3774737467-kit-3-travessas-com-alca-retangular-cermica-louca-decoraco-_JM?matt_tool=37064035&matt_internal_campaign_id&matt_word&matt_source=google&matt_campaign_id=22090354481&matt_ad_group_id=173090607116&matt_match_type&matt_network=g&matt_device=m&matt_creative=727882733004&matt_keyword&matt_ad_position&matt_ad_type=pla&matt_merchant_id=5308444372&matt_product_id=MLB3774737467&matt_product_partition_id=2389601385506&matt_target_id=pla-2389601385506&cq_src=google_ads&cq_cmp=22090354481&cq_net=g&cq_plt=gp&cq_med=pla&gad_source=1&gad_campaignid=22090354481&gbraid=0AAAAAD93qcASMijs_amIKFyw5sproQT3n&gclid=Cj0KCQjw2N2_BhCAARIsAK4pEkXhG-AkRsk8Jtfo3OS3AZTcy0mUymiR0l6X9YT85Q91CCaziWyGL5waAu95EALw_wcB&skipInApp=true"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Kit Travessas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://lojakaster.cdn.magazord.com.br/img/2024/04/produto/17947/png-1200.png?ims=600x600"
+            alt="Kit Tabuas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Tabuas</h3>
+          <p class="gift-description">Com Suporte De Metal Black Stolf</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.lojakaster.com.br/kit-3-tabuas-teca-c-suporte-de-metal-linha-black?utm_source=google&utm_medium=Shopping&utm_campaign=kit-3-tabuas-teca-c-suporte-de-metal-linha-black&inStock&gad_source=4&gad_campaignid=21954396875&gclid=Cj0KCQjw2N2_BhCAARIsAK4pEkWWSSQiGlSRN9aCFs9LQ711-CtQg0E8QLq1OJ8Xx03dLhBFVa_szVYaAuRUEALw_wcB#derivacao=8"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Kit Tabuas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_748773-MLB74034845418_012024-F-kit-6-bowls-cumbuca-tigelas-300ml-estampada-caldos-e-sopas.webp"
+            alt="Kit Bowls Cumbuca Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Cumbuca</h3>
+          <p class="gift-description">300ml, Estampada, Caldos e Sopas</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://produto.mercadolivre.com.br/MLB-3574570917-kit-6-bowls-cumbuca-tigelas-300ml-estampada-caldos-e-sopas-_JM?matt_tool=31493002&matt_internal_campaign_id&matt_word&matt_source=google&matt_campaign_id=22090354070&matt_ad_group_id=173090534356&matt_match_type&matt_network=g&matt_device=m&matt_creative=727882727514&matt_keyword&matt_ad_position&matt_ad_type=pla&matt_merchant_id=344756244&matt_product_id=MLB3574570917&matt_product_partition_id=2389547296225&matt_target_id=pla-2389547296225&cq_src=google_ads&cq_cmp=22090354070&cq_net=g&cq_plt=gp&cq_med=pla&gad_source=4&gad_campaignid=22090354070&gbraid=0AAAAAD93qcBmpMrEU4iB2S7cfPoTmvayS&gclid=Cj0KCQjw2N2_BhCAARIsAK4pEkUCmb74miISix7GqXzQbKTGL2bVwtpzLtbiB4VbDO7b9mnx9OCuP_EaAqzeEALw_wcB&skipInApp=true"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Kit Bowls Cumbuca Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/41+Oz7o1BcL._AC_SX679_.jpg"
+            alt="Porta bolo"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Porta Bolo</h3>
+          <p class="gift-description">Bambu, Com Tampa de Acrílico</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/Porta-Acrilica-Ecokitchen-Mimo-Style/dp/B07XWB9SVB?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A1ZZFT5FULY4LN"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Porta Bolo!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61hxcu7jkjL._AC_SX679_.jpg"
+            alt="Jogo De Facas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Jogo De Facas</h3>
+          <p class="gift-description">6 Peças, Tramontina, Plenus, Branco</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B076MKTNRK?ref=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&ref_=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&social_share=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Jogo De Facas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://casabergan.fbitsstatic.net/img/p/toalha-de-banho-buddemeyer-zodiaco-air-cotton-100-algodao-gramatura-430g-m-150483/339660-1.jpg?w=620&h=620&v=202502130930&v=2025-04-07T12:03:24.000-03:00"
+            alt="Toalhas da Antônia"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Toalhas da Antônia</h3>
+          <p class="gift-description">2 Toalhas, Zodiaco Air, Cotton 100%</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.casabergan.com.br/produto/toalha-de-banho-buddemeyer-zodiaco-air-cotton-100-algodao-gramatura-430g-m-150483?utm_source=Google&utm_medium=Shopping&gad_source=4&gad_campaignid=21779248208&gclid=Cj0KCQjwnui_BhDlARIsAEo9Gus71XRR1JhaaTlLxXH17vREbpoK5djtAnSZJgScBHIAgVHk1UWSssAaAjNwEALw_wcB"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com as Toalhas da Antônia!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_672757-MLB75590089158_042024-F.webp"
+            alt="Toalhas do Casal (1)"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Toalhas do Casal (1)</h3>
+          <p class="gift-description">Gigante Banhão, Buddemeyer, Dual Air, 100% Algodão</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.lojaslutex.com.br/MLB-3655228673-jogo-banho-gigante-banho-buddemeyer-dual-air-100-algodo-_JM?attributes=COLOR_SECONDARY_COLOR:QXp1bCBWZXJkZSAxODEwLzE2NzY%3D&quantity=1 "
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com as Toalhas do Casal (1)!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_672757-MLB75590089158_042024-F.webp"
+            alt="Toalhas do Casal (2)"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Toalhas do Casal (2)</h3>
+          <p class="gift-description">Gigante Banhão, Buddemeyer, Dual Air, 100% Algodão</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.lojaslutex.com.br/MLB-3655228673-jogo-banho-gigante-banho-buddemeyer-dual-air-100-algodo-_JM?attributes=COLOR_SECONDARY_COLOR%3AQXp1bCBWZXJkZSAxODEwLzE2NzY%3D&quantity=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com as Toalhas do Casal (2)!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_721780-MLU76558502673_052024-F.webp"
+            alt="Bowls Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Tigelas</h3>
+          <p class="gift-description">Inox, Tampa Plástica</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.mercadolivre.com.br/conjunto-com-3-bowls-tigelas-inox-e-tampa-plastica-electrolux/p/MLB25125996?pdp_filters=item_id:MLB3588989695&from=gshop&matt_tool=13891073&matt_internal_campaign_id&matt_word&matt_source=google&matt_campaign_id=22090193717&matt_ad_group_id=174661962604&matt_match_type&matt_network=g&matt_device=m&matt_creative=727914179503&matt_keyword&matt_ad_position&matt_ad_type=pla&matt_merchant_id=735128761&matt_product_id=MLB25125996-product&matt_product_partition_id=2389547296265&matt_target_id=pla-2389547296265&cq_src=google_ads&cq_cmp=22090193717&cq_net=g&cq_plt=gp&cq_med=pla&gad_source=4&gad_campaignid=22090193717&gbraid=0AAAAAD93qcADmLn0tWCuWxrNDfrFrXO5N&gclid=Cj0KCQjwnui_BhDlARIsAEo9GusFgmt-TGVS_l_FU22Wi6-SZnxenAE3WUwO3XA_6nUeCQJlUd6YKWYaAlSiEALw_wcB&skipInApp=true"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Bowls Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://down-br.img.susercontent.com/file/br-11134207-7qukw-lhrqq5wqr62ffd@resize_w900_nl.webp"
+            alt="Kit Manta Protetora para Sofá"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Kit Manta Protetora para Sofá</h3>
+          <p class="gift-description">Indiano Cinza, Jacquard 1,40x1,80 + 2 capas de almofada</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://shopee.com.br/Kit-Manta-Protetora-para-Sof%C3%A1-em-Jacquard-1-40x1-80-2-capas-de-almofada-i.375186042.23291454799?sp_atk=1d61ef39-db76-4d63-ad10-add94442d9d1&xptdk=1d61ef39-db76-4d63-ad10-add94442d9d1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Kit Manta Protetora para Sofá!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://carrefourbr.vtexassets.com/arquivos/ids/41709050/cj-taca-cristal-vinho-6pc-580ml-ho211244-1.jpg?v=637834910871800000"
+            alt="Kit taças"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Jogo de Taças</h3>
+          <p class="gift-description">580ml, Cristal Bohemia</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.carrefour.com.br/jogo-de-tacas-para-vinho-cristal-580ml-cristal-bohemia-ho211244-6-pecas-5817293/p?utm_medium=sem&utm_source=google_pmax_1p&utm_campaign=1p_performancemax_bazar_geral_bazar&gad_source=4&gad_campaignid=22238968939&gbraid=0AAAAADjinonxD4HRfnaMxKb-pT3g5xSbQ&gclid=Cj0KCQjwnui_BhDlARIsAEo9GushQtGKA9HWKuKGUpoeHQGs_g5dJZHBSxKsls2UhNP0v_KYjbgAslYaAjIZEALw_wcB"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Jogo de Taças!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lsf2ra3r2fwt16.webp"
+            alt="Cesto de Roupas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Cesto de Roupas</h3>
+          <p class="gift-description">Bambu, Forrado, 60cm, Retangular</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://shopee.com.br/Cesto-De-Roupa-Suja-Bambu-Dobravel-Organizador-Forrado-Banheiro-60cm-Grande-Cesto-Retangular-i.961638733.19599212641"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Cesto de Roupas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lugcoaoi2e1gf1@resize_w900_nl.webp"
+            alt="Jogo de Copos"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Jogo de Copos</h3>
+          <p class="gift-description">Kit com 06, 520ML, Vidro, Grande</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://shopee.com.br/Jogo-Kit-06-Copo-520ML-Vidro-Bristol-Grande-Long-Drink-Nadir-Figueiredo-Refrigerante-Outback-Coca-i.1008818562.23792250514?sp_atk=fdbda79d-edc2-44f7-89f6-206534a397f6&xptdk=fdbda79d-edc2-44f7-89f6-206534a397f6"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Jogo de Copos!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61bqAfg6p1L._AC_SX679_.jpg"
+            alt="Utensílios de cozinha"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Utensílios de cozinha</h3>
+          <p class="gift-description">com 13 peças, aço inoxidável, cabo de silicone, ferramentas de cozinha, cáqui</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B0BTTN54J8?ref=cm_sw_r_cso_wa_mwn_dp_607ZQWMCDM5XR65YVB9Z&ref_=cm_sw_r_cso_wa_mwn_dp_607ZQWMCDM5XR65YVB9Z&social_share=cm_sw_r_cso_wa_mwn_dp_607ZQWMCDM5XR65YVB9Z&previewDoh=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com os Utensílios de cozinha!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_2X_805071-MLB83504877654_042025-F-lamborghini-urus-lp-650-4-2019.webp"
+            alt="Lamborghini Urus"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Lamborghini Urus</h3>
+          <p class="gift-description">MOTOR 4.0L V8 BITURBO COM 650 CV</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://carro.mercadolivre.com.br/MLB-5319954544-lamborghini-urus-lp-650-4-2019-_JM#polycard_client=search-nordic&position=2&search_layout=grid&type=item&tracking_id=b4e54b4c-0cfb-42a8-b2b0-3d086657290e"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com a Lamborghini Urus!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61hxcu7jkjL._AC_SX679_.jpg"
+            alt="Bowls Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Bowls Tigelas</h3>
+          <p class="gift-description">6 Peças, Tramontina, Plenus, Branco</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B076MKTNRK?ref=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&ref_=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&social_share=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Bowls Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61hxcu7jkjL._AC_SX679_.jpg"
+            alt="Bowls Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Bowls Tigelas</h3>
+          <p class="gift-description">6 Peças, Tramontina, Plenus, Branco</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B076MKTNRK?ref=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&ref_=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&social_share=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Bowls Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61hxcu7jkjL._AC_SX679_.jpg"
+            alt="Bowls Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Bowls Tigelas</h3>
+          <p class="gift-description">6 Peças, Tramontina, Plenus, Branco</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B076MKTNRK?ref=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&ref_=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&social_share=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Bowls Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+        <div class="gift-item">
+          <img
+            src="https://m.media-amazon.com/images/I/61hxcu7jkjL._AC_SX679_.jpg"
+            alt="Bowls Tigelas"
+            class="gift-image"
+          />
+          <h3 class="gift-name">Bowls Tigelas</h3>
+          <p class="gift-description">6 Peças, Tramontina, Plenus, Branco</p>
+          <div class="button-group">
+            <!-- EDITAR: Link da loja -->
+            <a
+              href="https://www.amazon.com.br/dp/B076MKTNRK?ref=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&ref_=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&social_share=cm_sw_r_cso_wa_mwn_dp_B3J1Q1FZ7T4ACMR38G2D&th=1"
+              target="_blank"
+              class="button buy-button"
+              >Presentear</a
+            >
+            <!-- EDITAR: Número do WhatsApp e mensagem -->
+            <a
+              href="https://wa.me/554891283484?text=Olá! Vou presentear vocês com o Bowls Tigelas!!"
+              target="_blank"
+              class="button whatsapp-button"
+              >Avisar</a
+            >
+          </div>
+        </div>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>
